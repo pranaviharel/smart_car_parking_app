@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Car Parking App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .parking-lot {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+
+        .slot {
+            background-color: #4CAF50; /* Green for available slots */
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .slot.booked {
+            background-color: #f44336; /* Red for booked slots */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🚗 Smart Car Parking App</h1>
+    <p>Click on a green slot to book it. Red slots are already booked.</p>
+    
+    <p class="available-slots-count">Slots Available: 8</p>
+
+    <div class="parking-lot">
+        <div class="slot">Slot 1</div>
+        <div class="slot">Slot 2</div>
+        <div class="slot">Slot 3</div>
+        <div class="slot">Slot 4</div>
+        <div class="slot">Slot 5</div>
+        <div class="slot">Slot 6</div>
+        <div class="slot">Slot 7</div>
+        <div class="slot">Slot 8</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const slots = document.querySelectorAll('.slot');
+            const availableSlotsElement = document.querySelector('.available-slots-count');
+            let availableSlots = 8;
+
+            slots.forEach(slot => {
+                slot.addEventListener('click', () => {
+                    if (!slot.classList.contains('booked')) {
+                        slot.classList.add('booked');
+                        slot.innerText = "Booked";
+                        availableSlots--;
+                        availableSlotsElement.innerText = `Slots Available: ${availableSlots}`;
+                    } else {
+                        alert('This slot is already booked!');
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
